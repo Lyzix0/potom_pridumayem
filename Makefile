@@ -43,8 +43,8 @@ migrate-action:
 		-database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@app-postgres:5432/${POSTGRES_DB}?sslmode=disable \
 		"$(action)"
 
-run:
-	@export LOGGER_FOLDER=${PROJECT_ROOT}/out/logs && \
+app-run:
+	@export FOLDER=${PROJECT_ROOT}/out/logs && \
 	export POSTGRES_HOST=localhost && \
 	go mod tidy && \
 	go run ${PROJECT_ROOT}/cmd/app/main.go
