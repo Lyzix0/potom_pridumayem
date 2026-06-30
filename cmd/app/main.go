@@ -1,7 +1,11 @@
 package main
 
-import "potom_pridumaem/internal/app"
+import (
+	"github.com/potom_pridumaem/config"
+	"github.com/potom_pridumaem/internal/app"
+)
 
 func main() {
-	app.Run()
+	cfg := config.NewConfigMust()
+	app.Run(&cfg)
 }

@@ -1,19 +1,20 @@
 package app
 
 import (
-	"log"
+	"fmt"
 
-	"github.com/gofiber/fiber/v3"
+	"github.com/potom_pridumaem/config"
+	"github.com/potom_pridumaem/pkg/httpserver"
+	"github.com/potom_pridumaem/pkg/logger"
 )
 
-func Run() {
-	app := fiber.New()
+func Run(cfg *config.Config) {
+	lgr, err := logger.NewLogger(*cfg)
+	if err != nil {
+		panic(fmt.Sprintf("Init logger error: %s", err))
+	}
 
-	// Define a route for the GET method on the root path '/'
-	app.Get("/", func(c fiber.Ctx) error {
-		return c.SendString("Hello, World 👋!")
-	})
-
-	// Start the server on port 3000
-	log.Fatal(app.Listen(":3000"))
+	httpServer := httpserver.NewServer(lgr.Logger)
+	httpServer.Start()
+	httpServer.WaitForShutdown(*lgr.Logger)
 }
