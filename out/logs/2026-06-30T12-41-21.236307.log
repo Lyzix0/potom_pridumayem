@@ -1,3 +1,0 @@
-2026-06-30T15:41:21.236818	DEBUG	httpserver/server.go:69	START HTTP SERVER
-2026-06-30T15:43:43.355807	DEBUG	httpserver/server.go:91	app - Run - signal: interrupt
-2026-06-30T15:43:43.356319	DEBUG	httpserver/server.go:120	Graceful http server shutdown
