@@ -20,7 +20,7 @@ migrate-create:
 		exit 1; \
 	fi; \
 
-	docker compose run --rm	app-postgres-migrate \
+	@docker-compose run --rm app-postgres-migrate \
 		create \
 		-ext sql \
 		-dir /migrations \
@@ -44,7 +44,7 @@ migrate-action:
 		"$(action)"
 
 app-run:
-	@export FOLDER=${PROJECT_ROOT}/out/logs && \
+	@export LOGGER_FOLDER=${PROJECT_ROOT}/out/logs && \
 	export POSTGRES_HOST=localhost && \
 	go mod tidy && \
 	go run ${PROJECT_ROOT}/cmd/app/main.go
