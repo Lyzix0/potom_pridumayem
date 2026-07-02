@@ -23,7 +23,7 @@ migrate-create:
 	@docker-compose run --rm app-postgres-migrate \
 		create \
 		-ext sql \
-		-dir /migrations \
+		-dir //migrations \
 		-seq "$(seq)"
 
 
@@ -39,7 +39,7 @@ migrate-action:
 		exit 1; \
 	fi
 	@MSYS_NO_PATHCONV=1 docker compose run --rm app-postgres-migrate \
-		-path /migrations \
+		-path //migrations \
 		-database postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@app-postgres:5432/${POSTGRES_DB}?sslmode=disable \
 		"$(action)"
 
@@ -55,3 +55,6 @@ ps:
 logs-cleanup:
 	@sudo rm -rf ${PROJECT_ROOT}/out/logs; \
 	echo "Logs were cleaned!";
+
+app-deploy:
+	@docker compose up -d --build app
